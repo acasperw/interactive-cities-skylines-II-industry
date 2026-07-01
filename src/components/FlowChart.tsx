@@ -47,10 +47,11 @@ function buildGraph(): { nodes: Node[]; edges: Edge[] } {
         source,
         target: item.id,
         // Orthogonal runs with generously rounded corners: a hybrid between
-        // straight step edges and full bezier curves.
+        // straight step edges and full bezier curves. `pathOptions` is only on
+        // the smoothstep edge variant, so assert the concrete edge type.
         type: "smoothstep",
         pathOptions: { borderRadius: 28 },
-      });
+      } as Edge);
     }
   }
 
