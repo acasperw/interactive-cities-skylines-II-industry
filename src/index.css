@@ -1,0 +1,132 @@
+:root {
+  --bg: #0f1420;
+  --panel: #171d2b;
+  --border: #2a3346;
+  --text: #e6e9ef;
+  --muted: #9aa4b8;
+  --accent: #4aa8ff;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app__header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.app__header h1 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.app__header p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.app__flow {
+  flex: 1;
+  min-height: 0;
+}
+
+/* React Flow node styling driven by category + highlight state */
+.rf-node {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--panel);
+  color: var(--text);
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rf-node--raw {
+  background: #26351f;
+  border-color: #4d6b3a;
+}
+.rf-node--material {
+  background: #3a2e1a;
+  border-color: #7a5f2e;
+}
+.rf-node--good {
+  background: #1f3040;
+  border-color: #35617d;
+}
+.rf-node--commercial {
+  background: #2a2340;
+  border-color: #5a4a86;
+}
+.rf-node--office {
+  background: #402330;
+  border-color: #86496a;
+}
+
+.rf-node--selected {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Handles are only edge anchors here, not interactive connection points. */
+.rf-node .react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dimmed {
+  opacity: 0.12;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
