@@ -52,6 +52,25 @@ body {
   color: var(--muted);
 }
 
+.app__source {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  align-self: center;
+}
+
+.app__source:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
 .app__flow {
   flex: 1;
   min-height: 0;
@@ -129,4 +148,38 @@ body {
   height: 10px;
   border-radius: 3px;
   display: inline-block;
+}
+
+/* React Flow zoom / fit / lock controls — themed for the dark UI */
+.react-flow__controls {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border);
+}
+
+.react-flow__controls-button {
+  background: var(--panel);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  width: 28px;
+  height: 28px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+
+.react-flow__controls-button svg {
+  fill: var(--muted);
+  transition: fill 0.15s ease;
+}
+
+.react-flow__controls-button:hover {
+  background: #202a3c;
+}
+
+.react-flow__controls-button:hover svg {
+  fill: var(--accent);
 }

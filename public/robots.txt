@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acasperw.github.io/interactive-cities-skylines-II-industry/sitemap.xml
