@@ -10,10 +10,12 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment, cancel in-progress runs.
+# Allow one concurrent deployment. Do NOT cancel in-progress Pages
+# deployments — cancelling mid-flight can leave the deployment stuck
+# "in progress" on GitHub's side, blocking future runs in queued state.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
