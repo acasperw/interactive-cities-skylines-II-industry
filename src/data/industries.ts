@@ -37,6 +37,9 @@ export type Sink =
   | "industry"
   | "offices"
   | "export"
+  | "upkeep"
+  | "processing"
+  | "healthcareDeathcare"
   | "heating"
   | "electricity"
   | "parks"
@@ -87,6 +90,9 @@ export const SINK_LABELS: Record<Sink, string> = {
   industry: "Used by industry",
   offices: "Used by offices",
   export: "Exported as surplus",
+  upkeep: "Used for upkeep",
+  processing: "Used in processing",
+  healthcareDeathcare: "Used in Healthcare & Deathcare",
   heating: "Used for heating",
   electricity: "Used for electricity generation",
   parks: "Used in Parks & Recreation",
@@ -95,20 +101,32 @@ export const SINK_LABELS: Record<Sink, string> = {
 
 export const ITEMS: Item[] = [
   // --- Raw resources ---------------------------------------------------------
-  { id: "wood", label: "Wood", category: "raw" },
+  { id: "wood", label: "Wood", category: "raw", sinks: ["heating", "export"] },
   { id: "grain", label: "Grain", category: "raw" },
   { id: "livestock", label: "Livestock", category: "raw", sinks: ["export"] },
   { id: "fish", label: "Fish", category: "raw" },
   { id: "vegetables", label: "Vegetables", category: "raw" },
   { id: "cotton", label: "Cotton", category: "raw" },
   { id: "oil", label: "Crude Oil", category: "raw", sinks: ["export"] },
-  { id: "coal", label: "Coal", category: "raw" },
+  { id: "coal", label: "Coal", category: "raw", sinks: ["electricity", "export"] },
   { id: "stone", label: "Stone", category: "raw" },
   { id: "ore", label: "Ore", category: "raw" },
 
   // --- Materials -------------------------------------------------------------
-  { id: "timber", label: "Timber", category: "material", inputs: ["wood"] },
-  { id: "paper", label: "Paper", category: "material", inputs: ["wood"] },
+  {
+    id: "timber",
+    label: "Timber",
+    category: "material",
+    inputs: ["wood"],
+    sinks: ["industry", "upkeep", "export"],
+  },
+  {
+    id: "paper",
+    label: "Paper",
+    category: "material",
+    inputs: ["timber"],
+    sinks: ["offices", "consumers", "export"],
+  },
   {
     id: "petrochemicals",
     label: "Petrochemicals",
@@ -122,6 +140,13 @@ export const ITEMS: Item[] = [
     category: "material",
     inputs: ["ore", "coal"],
   },
+  {
+    id: "steel",
+    label: "Steel",
+    category: "material",
+    inputs: ["coal", "metals"],
+    sinks: ["industry", "export"],
+  },
   { id: "minerals", label: "Minerals", category: "material", inputs: ["stone"] },
   {
     id: "chemicals",
@@ -132,7 +157,13 @@ export const ITEMS: Item[] = [
   },
 
   // --- Finished goods --------------------------------------------------------
-  { id: "furniture", label: "Furniture", category: "good", inputs: ["timber"] },
+  {
+    id: "furniture",
+    label: "Furniture",
+    category: "good",
+    inputs: ["timber"],
+    sinks: ["industry", "offices", "consumers", "export"],
+  },
   {
     id: "convenience-food",
     label: "Convenience Food",
@@ -172,19 +203,21 @@ export const ITEMS: Item[] = [
     label: "Pharmaceuticals",
     category: "good",
     inputs: ["chemicals"],
+    sinks: ["consumers", "healthcareDeathcare", "export"],
   },
   {
     id: "concrete",
     label: "Concrete",
     category: "good",
     inputs: ["stone"],
-    note: "Required for upkeep.",
+    sinks: ["upkeep"],
   },
   {
     id: "machinery",
     label: "Machinery",
     category: "good",
-    inputs: ["metals"],
+    inputs: ["steel"],
+    sinks: ["processing", "export"],
   },
   {
     id: "electronics",
